@@ -1,5 +1,7 @@
 import l4.EventCalendar;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.annotation.Testable;
 
 import java.util.Date;
 import java.util.List;
@@ -26,30 +28,34 @@ class EventCalendarTest {
     void getEvent() {
     }
 
-    @Test
-    void zeroSpanNonOverlapTest() {
-        Date now = new Date();
-        var ds1 = new EventCalendar.DateSpan(now, now);
-        var ds2 = new EventCalendar.DateSpan(now, now);
-        assertEquals(ds1, ds2);
-        assertFalse(ds1.overlaps(ds2));
-    }
+    @Nested
+    class DataSpanTest {
 
-    @Test
-    void spanOverlapTest() {
-        assertTrue(new EventCalendar.DateSpan(dates[0], dates[2])
-                           .overlaps(new EventCalendar.DateSpan(dates[1], dates[3])));
-        assertFalse(new EventCalendar.DateSpan(dates[0], dates[0])
-                            .overlaps(new EventCalendar.DateSpan(dates[0], dates[3])));
-        assertFalse(new EventCalendar.DateSpan(dates[0], dates[1])
-                            .overlaps(new EventCalendar.DateSpan(dates[1], dates[2])));
-        assertFalse(new EventCalendar.DateSpan(dates[0], dates[1])
-                            .overlaps(new EventCalendar.DateSpan(dates[2], dates[3])));
-    }
+        @Test
+        void zeroSpanNonOverlapTest() {
+            Date now = new Date();
+            var ds1 = new EventCalendar.DateSpan(now, now);
+            var ds2 = new EventCalendar.DateSpan(now, now);
+            assertEquals(ds1, ds2);
+            assertFalse(ds1.overlaps(ds2));
+        }
 
-    @Test
-    void invalidSpanTest() {
-        assertThrows(IllegalArgumentException.class, () -> {new EventCalendar.DateSpan(dates[1], dates[0]);});
+        @Test
+        void spanOverlapTest() {
+            assertTrue(new EventCalendar.DateSpan(dates[0], dates[2])
+                               .overlaps(new EventCalendar.DateSpan(dates[1], dates[3])));
+            assertFalse(new EventCalendar.DateSpan(dates[0], dates[0])
+                                .overlaps(new EventCalendar.DateSpan(dates[0], dates[3])));
+            assertFalse(new EventCalendar.DateSpan(dates[0], dates[1])
+                                .overlaps(new EventCalendar.DateSpan(dates[1], dates[2])));
+            assertFalse(new EventCalendar.DateSpan(dates[0], dates[1])
+                                .overlaps(new EventCalendar.DateSpan(dates[2], dates[3])));
+        }
+
+        @Test
+        void invalidSpanTest() {
+            assertThrows(IllegalArgumentException.class, () -> {new EventCalendar.DateSpan(dates[1], dates[0]);});
+        }
     }
 
 }
