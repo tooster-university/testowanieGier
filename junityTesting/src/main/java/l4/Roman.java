@@ -21,7 +21,7 @@ public class Roman {
      */
     public static String toRoman(int x) {
 
-        if (x <= 0 || x >= 5000)
+        if (x <= 0 || x >= 4001)
             throw new IllegalArgumentException("Number " + x + " out of range [0-4999].");
 
         StringBuilder xRoman = new StringBuilder();
