@@ -63,7 +63,7 @@ public class EventCalendar {
      * @throws IllegalArgumentException if new span doesn't
      */
     public void editDate(@NotNull String name, @NotNull DateSpan newDateSpan) {
-        if (events.containsKey(name)) throw new IllegalArgumentException("Event '" + name + "'doesn't exist.");
+        if (!events.containsKey(name)) throw new IllegalArgumentException("Event '" + name + "'doesn't exist.");
         var oldSpan = events.remove(name);
         var overlapping = events.entrySet().stream()
                 .filter(e -> e.getValue().overlaps(newDateSpan))
