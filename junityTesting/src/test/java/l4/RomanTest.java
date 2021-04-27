@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class RomanTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0, -1, 5000})
+    @ValueSource(ints = {0, -1, 4001})
     void toRomanThrows(int number) {
         assertThrows(IllegalArgumentException.class, () -> Roman.toRoman(number));
     }
@@ -24,7 +24,7 @@ class RomanTest {
     @Test
     @ExtendWith(FileExtension.class)
     void toRomanCheckAll(@FileExtension.File(path = "roman.txt") String numbers){
-        var actual = IntStream.range(1, 5000).mapToObj(Roman::toRoman);
+        var actual = IntStream.range(1, 4001).mapToObj(Roman::toRoman);
         assertLinesMatch(Arrays.stream(numbers.split("\n")), actual);
     }
 }
