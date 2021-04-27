@@ -15,11 +15,15 @@ public class Triangle {
         equalPairs += Math.abs(s1 - s2) <= EPSILON ? 1 : 0;
         equalPairs += Math.abs(s2 - s3) <= EPSILON ? 1 : 0;
         equalPairs += Math.abs(s1 - s3) <= EPSILON ? 1 : 0;
-        return switch (equalPairs) {
-            case 3 -> TYPE.EQUILATERAL;
-            case 2, 1 -> TYPE.ISOSCELES;
-            default -> TYPE.OTHER;
-        };
+        switch (equalPairs) {
+            case 3:
+            	return TYPE.EQUILATERAL;
+            case 2:
+            case 1:
+            	return TYPE.ISOSCELES;
+            default:
+            	return TYPE.OTHER;
+        }
     }
 
     enum TYPE {EQUILATERAL, ISOSCELES, OTHER}
