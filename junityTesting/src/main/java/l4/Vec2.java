@@ -1,15 +1,15 @@
 package l4;
 
 public class Vec2 {
-    public float x;
-    public float y;
+    public double x;
+    public double y;
 
     public Vec2() {
         this.x = 0.0f;
         this.y = 0.0f;
     }
 
-    public Vec2(float x, float y) {
+    public Vec2(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -23,8 +23,8 @@ public class Vec2 {
      * @return squared euclidean distance between a and b
      */
     public static double distanceSquared(Vec2 a, Vec2 b) {
-        float v0 = b.x - a.x;
-        float v1 = b.y - a.y;
+        double v0 = b.x - a.x;
+        double v1 = b.y - a.y;
         return v0 * v0 + v1 * v1;
     }
 
@@ -39,6 +39,10 @@ public class Vec2 {
     public static double distance(Vec2 a, Vec2 b) {
         return Math.sqrt(distanceSquared(a, b));
     }
+
+    public Vec2 scaled(double scale) { return new Vec2(x * scale, y * scale); }
+
+    public Vec2 translated(Vec2 offset) { return new Vec2(x + offset.x, y + offset.y); }
 
     // Compare two vectors
     public boolean equals(Vec2 other) {
